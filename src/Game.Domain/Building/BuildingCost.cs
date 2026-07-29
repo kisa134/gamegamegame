@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Game.Domain.Exceptions;
 
 namespace Game.Domain.Building;
@@ -9,9 +10,14 @@ namespace Game.Domain.Building;
 /// </summary>
 public sealed class BuildingCost
 {
-    private readonly Dictionary<string, int> _requirements;
+    // Exposed as a ReadOnlyDictionary, not the raw Dictionary: handing out the
+    // backing store as IReadOnlyDictionary lets a caller cast it back and edit a
+    // cost after it was validated — and Free is a shared singleton, so one such
+    // edit would poison every free build in the process.
+    private readonly ReadOnlyDictionary<string, int> _requirements;
 
-    private BuildingCost(Dictionary<string, int> requirements) => _requirements = requirements;
+    private BuildingCost(Dictionary<string, int> requirements) =>
+        _requirements = new ReadOnlyDictionary<string, int>(requirements);
 
     public static BuildingCost Free { get; } = new(new Dictionary<string, int>(StringComparer.Ordinal));
 

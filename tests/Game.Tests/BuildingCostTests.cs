@@ -38,4 +38,25 @@ public sealed class BuildingCostTests
     [Fact]
     public void Of_WithDuplicateItem_Throws() =>
         Assert.Throws<DomainException>(() => BuildingCost.Of(("wood", 1), ("wood", 2)));
+
+    [Fact]
+    public void Requirements_CannotBeEditedThroughACastAfterValidation()
+    {
+        var cost = BuildingCost.Of(("wood", 3));
+
+        var asDictionary = Assert.IsAssignableFrom<IDictionary<string, int>>(cost.Requirements);
+        Assert.True(asDictionary.IsReadOnly);
+        Assert.Throws<NotSupportedException>(() => asDictionary["wood"] = 0);
+        Assert.Equal(3, cost.Requirements["wood"]);
+    }
+
+    [Fact]
+    public void Free_IsASharedSingletonThatCannotBePoisoned()
+    {
+        var asDictionary = Assert.IsAssignableFrom<IDictionary<string, int>>(BuildingCost.Free.Requirements);
+
+        Assert.Throws<NotSupportedException>(() => asDictionary["wood"] = 99);
+        Assert.Empty(BuildingCost.Free.Requirements);
+        Assert.True(BuildingCost.Free.IsFree);
+    }
 }

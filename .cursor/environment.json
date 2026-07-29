@@ -1,0 +1,14 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "install": "dotnet restore Game.sln",
+  "default_branch_strategy": "feature/jira-{issue_key}",
+  "terminals": [
+    {
+      "name": "test",
+      "command": "dotnet test Game.sln --no-restore"
+    }
+  ]
+}

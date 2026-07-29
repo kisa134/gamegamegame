@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: dotnet test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore Game.sln
+
+      - name: Build
+        run: dotnet build Game.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test Game.sln --configuration Release --no-build --verbosity normal
+
+      - name: Dependency audit (no UnityEngine in Domain/Application)
+        run: |
+          set -euo pipefail
+          if grep -RInE 'using[[:space:]]+(UnityEngine|UnityEditor|TMPro)' src/Game.Domain src/Game.Application; then
+            echo "Forbidden Unity usings found in Domain/Application" >&2
+            exit 1
+          fi
+          echo "Dependency audit passed."

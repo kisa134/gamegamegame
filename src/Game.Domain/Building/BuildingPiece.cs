@@ -1,4 +1,5 @@
 using System.Numerics;
+using Game.Compat;
 using Game.Domain.Exceptions;
 using InventoryBag = Game.Domain.Inventory.Inventory;
 
@@ -40,8 +41,8 @@ public sealed class BuildingPiece
         if (support == SupportKind.None)
             throw new DomainException("Cannot place a building piece in the air: support required.");
 
-        ArgumentNullException.ThrowIfNull(cost);
-        ArgumentNullException.ThrowIfNull(inventory);
+        Guard.NotNull(cost, nameof(cost));
+        Guard.NotNull(inventory, nameof(inventory));
 
         // The whole cost is verified before anything is removed. Deducting as we go
         // would leave a half-paid inventory behind when a later item falls short.

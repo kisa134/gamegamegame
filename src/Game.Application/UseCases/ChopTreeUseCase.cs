@@ -1,6 +1,7 @@
 using System.Numerics;
 using Game.Application.Events;
 using Game.Application.Ports;
+using Game.Compat;
 using Game.Domain.Events;
 using InventoryBag = Game.Domain.Inventory.Inventory;
 
@@ -21,11 +22,8 @@ public sealed class ChopTreeUseCase
 
     public ChopTreeUseCase(ITreeRegistry trees, IEventBus bus)
     {
-        ArgumentNullException.ThrowIfNull(trees);
-        ArgumentNullException.ThrowIfNull(bus);
-
-        _trees = trees;
-        _bus = bus;
+        _trees = Guard.NotNull(trees, nameof(trees));
+        _bus = Guard.NotNull(bus, nameof(bus));
     }
 
     /// <summary>
@@ -36,7 +34,7 @@ public sealed class ChopTreeUseCase
     /// </summary>
     public bool Execute(ChopTreeCommand command, InventoryBag inventory)
     {
-        ArgumentNullException.ThrowIfNull(inventory);
+        Guard.NotNull(inventory, nameof(inventory));
 
         var tree = _trees.FindStandingTreeWithinReach(command.Origin, command.Reach);
         if (tree is null)

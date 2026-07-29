@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <!-- Mirrors Game.Domain: net8.0 for tests and CI, netstandard2.1 for the Unity plugin. -->
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -11,6 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Game.Domain\Game.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Compat\*.cs" LinkBase="Compat" />
   </ItemGroup>
 
 </Project>

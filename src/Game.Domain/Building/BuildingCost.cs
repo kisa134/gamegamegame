@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Game.Compat;
 using Game.Domain.Exceptions;
 
 namespace Game.Domain.Building;
@@ -23,7 +24,7 @@ public sealed class BuildingCost
 
     public static BuildingCost Of(params (string ItemId, int Quantity)[] requirements)
     {
-        ArgumentNullException.ThrowIfNull(requirements);
+        Guard.NotNull(requirements, nameof(requirements));
 
         var map = new Dictionary<string, int>(StringComparer.Ordinal);
         foreach (var (itemId, quantity) in requirements)

@@ -1,45 +1,48 @@
-# --- Unity ---
+# --- .NET-ядро: коммитим csproj/sln, игнорим сборки ---
+bin/
+obj/
+*.sln.docstates
+
+# --- Unity-проект MYgame/ — исключён целиком до Unity-фазы (Story 4) ---
+MYgame/
+
+# --- Unity generated/local (где угодно в дереве) ---
 [Ll]ibrary/
 [Tt]emp/
-[Oo]bj/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 [Mm]emoryCaptures/
 [Rr]ecordings/
-*.csproj.user
 *.unityproj
-*.suo
+*.apk
+*.aab
+*.app
+crashlytics-build.properties
+
+# --- IDE / локальные пользовательские файлы ---
+.vs/
+.vsconfig
+*.csproj.user
 *.user
 *.userprefs
+*.suo
 *.pidb
 *.booproj
 *.svd
 *.pdb.meta
 *.opendb
 *.VC.db
-.vs/
-.vsconfig
-*.apk
-*.aab
-*.app
-crashlytics-build.properties
 
-# --- .NET сборки (ядро) ---
-bin/
-obj/
-*.sln.docstates
-
-# --- Synty и любые тяжёлые паки: НЕ в git ---
-# Существуют только на диске (~5 ГБ). Импортировать в Unity вручную.
+# --- Synty и любые тяжёлые паки: никогда в git (~5 ГБ на диске) ---
 *.unitypackage
 *.zip
-[Aa]ssets/Synty/
-[Aa]ssets/Synty.meta
+**/Assets/Synty/
+**/Assets/Synty.meta
 _packs/
 
-# --- Прочее ---
+# --- OS ---
 .DS_Store
 Thumbs.db
 *.tmp

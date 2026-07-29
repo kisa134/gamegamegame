@@ -42,6 +42,9 @@ crashlytics-build.properties
 **/Assets/Synty.meta
 _packs/
 
+# --- Личные настройки агента (общие правила — в .claude/settings.json) ---
+.claude/settings.local.json
+
 # --- OS ---
 .DS_Store
 Thumbs.db

@@ -1,0 +1,45 @@
+# --- Unity ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+*.csproj.user
+*.unityproj
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb.meta
+*.opendb
+*.VC.db
+.vs/
+.vsconfig
+*.apk
+*.aab
+*.app
+crashlytics-build.properties
+
+# --- .NET сборки (ядро) ---
+bin/
+obj/
+*.sln.docstates
+
+# --- Synty и любые тяжёлые паки: НЕ в git ---
+# Существуют только на диске (~5 ГБ). Импортировать в Unity вручную.
+*.unitypackage
+*.zip
+[Aa]ssets/Synty/
+[Aa]ssets/Synty.meta
+_packs/
+
+# --- Прочее ---
+.DS_Store
+Thumbs.db
+*.tmp

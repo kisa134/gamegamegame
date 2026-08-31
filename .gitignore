@@ -3,8 +3,8 @@ bin/
 obj/
 *.sln.docstates
 
-# --- Unity-проект MYgame/ — исключён целиком до Unity-фазы (Story 4) ---
-MYgame/
+# --- Unity-проект MYgame/ теперь в git. Мусор отсекают правила ниже:
+#     Library/, Temp/, Logs/, Builds/, UserSettings/, obj/ и Assets/Synty/ ---
 
 # --- Unity generated/local (где угодно в дереве) ---
 [Ll]ibrary/

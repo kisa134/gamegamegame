@@ -1,3 +1,4 @@
+using Game.Compat;
 using Game.Domain.Events;
 
 namespace Game.Application.Events;
@@ -9,7 +10,7 @@ public sealed class InMemoryEventBus : IEventBus
 
     public void Subscribe<TEvent>(Action<TEvent> handler) where TEvent : IDomainEvent
     {
-        ArgumentNullException.ThrowIfNull(handler);
+        Guard.NotNull(handler, nameof(handler));
 
         if (!_handlers.TryGetValue(typeof(TEvent), out var list))
         {
@@ -22,7 +23,7 @@ public sealed class InMemoryEventBus : IEventBus
 
     public void Publish<TEvent>(TEvent domainEvent) where TEvent : IDomainEvent
     {
-        ArgumentNullException.ThrowIfNull(domainEvent);
+        Guard.NotNull(domainEvent, nameof(domainEvent));
 
         if (_handlers.TryGetValue(typeof(TEvent), out var list))
         {

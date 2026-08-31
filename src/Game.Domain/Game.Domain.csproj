@@ -1,12 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <!-- net8.0 is what the tests and CI run against; netstandard2.1 is what Unity
+         consumes as a plugin DLL. Building both makes Unity compatibility a compiler
+         invariant rather than something a reviewer has to remember. -->
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <RootNamespace>Game.Domain</RootNamespace>
     <AssemblyName>Game.Domain</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Compat\*.cs" LinkBase="Compat" />
+  </ItemGroup>
 
 </Project>
